@@ -32,7 +32,7 @@ jobs:
       - name: Run rna-seq-star-deseq2
         uses: snakemake/snakemake-github-action@v1.22.0
         with:
-          directory: .test
+          directory: rna-seq-star-deseq2/.test
           snakefile: rna-seq-star-deseq2/workflow/Snakefile
           args: "--configfile rna-seq-star-deseq2/.test/config_basic/config.yaml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
 
