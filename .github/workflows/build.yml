@@ -54,7 +54,7 @@ jobs:
                     --show-failed-logs \
                     --cores 2 \
                     --conda-cleanup-pkgs cache
-        shell: bash -el {0}
+        shell: micromamba-shell {0}
 
       - uses: actions/setup-python@v4
         with:
