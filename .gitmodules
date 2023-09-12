@@ -1,0 +1,3 @@
+[submodule "rna-seq-star-deseq2"]
+	path = rna-seq-star-deseq2
+	url = https://github.com/snakemake-workflows/rna-seq-star-deseq2
