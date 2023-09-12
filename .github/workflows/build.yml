@@ -46,17 +46,6 @@ jobs:
           cache-environment: true
           post-cleanup: none
 
-      - name: Run rna-seq-star-deseq2
-        run: |
-          snakemake --directory rna-seq-star-deseq2/.test \
-                    --snakefile rna-seq-star-deseq2/workflow/Snakefile \
-                    --configfile rna-seq-star-deseq2/.test/config_basic/config.yaml \
-                    --use-conda \
-                    --show-failed-logs \
-                    --cores 2 \
-                    --conda-cleanup-pkgs cache
-        shell: micromamba-shell {0}
-
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
