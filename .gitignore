@@ -110,3 +110,4 @@ _docs_tmp*
 
 # Snakemake
 .snakemake
+rna-seq-star-deseq2
