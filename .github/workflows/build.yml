@@ -28,13 +28,29 @@ jobs:
           ssh-key: ${{ secrets.READ_LNDOCS }}
           path: lndocs
           ref: main
+      
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: '1.3.1-0'
+          environment-name: test-env
+          create-args: >-
+            python=${{ matrix.python-version }}
+            snakemake
+          init-shell: >-
+            bash
+          cache-environment: true
+          post-cleanup: none
 
       - name: Run rna-seq-star-deseq2
-        uses: snakemake/snakemake-github-action@v1.22.0
-        with:
-          directory: rna-seq-star-deseq2/.test
-          snakefile: rna-seq-star-deseq2/workflow/Snakefile
-          args: "--configfile rna-seq-star-deseq2/.test/config_basic/config.yaml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
+        run: |
+          snakemake --directory rna-seq-star-deseq2/.test \
+                    --snakefile rna-seq-star-deseq2/workflow/Snakefile \
+                    --configfile rna-seq-star-deseq2/.test/config_basic/config.yaml \
+                    --use-conda \
+                    --show-failed-logs \
+                    --cores 2 \
+                    --conda-cleanup-pkgs cache
+        shell: bash -el {0}
 
       - uses: actions/setup-python@v4
         with:
