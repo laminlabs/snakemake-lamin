@@ -72,7 +72,7 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
       - run: pip install -U laminci
-      - run: pip install snakemake
+      - run: pip install snakemake ftputil
       - run: sudo apt-get -y install graphviz
       - uses: aws-actions/configure-aws-credentials@v2
         with:
