@@ -85,6 +85,7 @@ jobs:
           aws-region: eu-central-1
       - run: nox -s lint
       - run: nox -s build
+        shell: micromamba-shell {0}
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
