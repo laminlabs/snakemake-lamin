@@ -55,7 +55,7 @@ jobs:
           cd docs/rna-seq-star-deseq2
           snakemake --directory .test \
                     --snakefile workflow/Snakefile \
-                    --configfile /.test/config_basic/config.yaml \
+                    --configfile .test/config_basic/config.yaml \
                     --use-conda \
                     --show-failed-logs \
                     --cores 2 \
