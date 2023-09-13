@@ -8,6 +8,6 @@ def test_notebooks():
     docs_folder = Path(__file__).parents[1] / "docs/"
 
     for check_folder in docs_folder.glob("./**"):
-        if {"rna-seq-star-deseq2"} in str(check_folder):
+        if "rna-seq-star-deseq2" in str(check_folder):
             continue
         test.execute_notebooks(check_folder, write=True)
