@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 
 import nbproject_test as test
@@ -13,4 +14,4 @@ def test_notebooks():
         test.execute_notebooks(check_folder, write=True)
 
     # Clean up unnecessary files
-    Path(f"{docs_folder}/rna-seq-star-deseq2").rmdir()
+    shutil.rmtree(f"{docs_folder}/rna-seq-star-deseq2", ignore_errors=True)
