@@ -46,7 +46,9 @@ jobs:
           post-cleanup: none
 
       - name: Clone rna-seq-star-deseq2
-        run: git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0 docs
+        run: |
+          git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0
+          mv https://github.com/snakemake-workflows/rna-seq-star-deseq2 docs
 
       - name: Run rna-seq-star-deseq2
         run: |
