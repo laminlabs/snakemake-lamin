@@ -63,7 +63,7 @@ jobs:
         shell: micromamba-shell {0}
 
       - name: Tree
-        run: tree
+        run: tree -a
 
       - uses: actions/setup-python@v4
         with:
