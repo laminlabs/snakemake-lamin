@@ -48,7 +48,7 @@ jobs:
       - name: Clone rna-seq-star-deseq2
         run: |
           git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0
-          mv https://github.com/snakemake-workflows/rna-seq-star-deseq2 docs
+          mv rna-seq-star-deseq2 docs
 
       - name: Run rna-seq-star-deseq2
         run: |
