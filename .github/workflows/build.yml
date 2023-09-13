@@ -73,9 +73,18 @@ jobs:
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
       - run: pip install -U laminci
       - run: pip install snakemake ftputil
-      - run: |
+      - name: Download and install Mambaforge
+        run: |
           curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-          yes | bash Mambaforge-$(uname)-$(uname -m).sh
+          chmod +x Mambaforge-$(uname)-$(uname -m).sh
+          # Use expect to automate 'yes' responses
+          expect -c '
+            set timeout -1
+            spawn ./Mambaforge-$(uname)-$(uname -m).sh
+            expect "Please, press ENTER to continue"
+            send "yes\r"
+            expect eof
+          '
       - run: sudo apt-get -y install graphviz
       - uses: aws-actions/configure-aws-credentials@v2
         with:
