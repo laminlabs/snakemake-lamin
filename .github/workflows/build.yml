@@ -51,16 +51,11 @@ jobs:
           mv rna-seq-star-deseq2 docs
 
       - name: Run rna-seq-star-deseq2
-        run: |
-          cd docs/rna-seq-star-deseq2
-          snakemake --directory .test \
-                    --snakefile workflow/Snakefile \
-                    --configfile .test/config_basic/config.yaml \
-                    --use-conda \
-                    --show-failed-logs \
-                    --cores 2 \
-                    --conda-cleanup-pkgs cache
-        shell: micromamba-shell {0}
+        uses: snakemake/snakemake-github-action@v1.22.0
+        with:
+          directory: .test
+          snakefile: workflow/Snakefile
+          args: "--configfile .test/config_basic/config.yaml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
 
       - uses: actions/setup-python@v4
         with:
@@ -72,6 +67,7 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
       - run: pip install -U laminci
+      - run: sudo apt-get -y install graphviz
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
