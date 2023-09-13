@@ -50,9 +50,6 @@ jobs:
           git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0
           mv rna-seq-star-deseq2 docs
 
-      - name: Tree
-        run: tree
-
       - name: Run rna-seq-star-deseq2
         run: |
           snakemake --directory docs/rna-seq-star-deseq2/.test \
@@ -63,6 +60,9 @@ jobs:
                     --cores 2 \
                     --conda-cleanup-pkgs cache
         shell: micromamba-shell {0}
+
+      - name: Tree
+        run: tree
 
       - uses: actions/setup-python@v4
         with:
