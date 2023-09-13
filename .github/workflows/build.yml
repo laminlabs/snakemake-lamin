@@ -75,7 +75,7 @@ jobs:
       - run: pip install snakemake ftputil
       - run: |
           curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-          bash Mambaforge-$(uname)-$(uname -m).sh
+          yes | bash Mambaforge-$(uname)-$(uname -m).sh
       - run: sudo apt-get -y install graphviz
       - uses: aws-actions/configure-aws-credentials@v2
         with:
