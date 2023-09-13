@@ -45,6 +45,20 @@ jobs:
           cache-environment: true
           post-cleanup: none
 
+      - name: Clone rna-seq-star-deseq2
+        run: git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0 docs
+
+      - name: Run rna-seq-star-deseq2
+        run: |
+          snakemake --directory docs/rna-seq-star-deseq2/.test \
+                    --snakefile docs/rna-seq-star-deseq2/workflow/Snakefile \
+                    --configfile docs/rna-seq-star-deseq2/.test/config_basic/config.yaml \
+                    --use-conda \
+                    --show-failed-logs \
+                    --cores 2 \
+                    --conda-cleanup-pkgs cache
+        shell: micromamba-shell {0}
+
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
