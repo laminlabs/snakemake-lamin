@@ -11,3 +11,6 @@ def test_notebooks():
         if "rna-seq-star-deseq2" in str(check_folder):
             continue
         test.execute_notebooks(check_folder, write=True)
+
+    # Clean up unnecessary files
+    Path("docs/rna-seq-star-deseq2").rmdir()
