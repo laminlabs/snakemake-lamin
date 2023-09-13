@@ -58,6 +58,7 @@ jobs:
                     --use-conda \
                     --show-failed-logs \
                     --cores 2 \
+                    --conda-cleanup-pkgs cache
         shell: micromamba-shell {0}
 
       - name: Tree
