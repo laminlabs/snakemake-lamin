@@ -13,4 +13,4 @@ def test_notebooks():
         test.execute_notebooks(check_folder, write=True)
 
     # Clean up unnecessary files
-    Path("docs/rna-seq-star-deseq2").rmdir()
+    Path(f"{docs_folder}/rna-seq-star-deseq2").rmdir()
