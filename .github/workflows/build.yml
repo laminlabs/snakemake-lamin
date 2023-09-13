@@ -63,7 +63,7 @@ jobs:
         shell: micromamba-shell {0}
 
       - name: Tree
-        run: tree docs/rna-seq-star-deseq2 -a
+        run: tree docs/rna-seq-star-deseq2/.test -a
 
       - uses: actions/setup-python@v4
         with:
