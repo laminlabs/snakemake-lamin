@@ -106,3 +106,8 @@ docs/snakemake_lamin_usecases.*
 lamin_sphinx
 docs/conf.py
 _docs_tmp*
+*.lndb
+
+# Snakemake
+.snakemake
+docs/rna-seq-star-deseq2

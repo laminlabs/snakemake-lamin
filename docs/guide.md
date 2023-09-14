@@ -3,5 +3,5 @@
 ```{toctree}
 :maxdepth: 1
 
-quickstart
+bulk_rna_seq
 ```

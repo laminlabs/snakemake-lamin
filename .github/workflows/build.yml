@@ -15,13 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.10"]
-    timeout-minutes: 15
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: recursive
       - uses: actions/checkout@v4
         with:
           repository: laminlabs/lndocs
@@ -46,17 +45,6 @@ jobs:
           cache-environment: true
           post-cleanup: none
 
-      - name: Run rna-seq-star-deseq2
-        run: |
-          snakemake --directory rna-seq-star-deseq2/.test \
-                    --snakefile rna-seq-star-deseq2/workflow/Snakefile \
-                    --configfile rna-seq-star-deseq2/.test/config_basic/config.yaml \
-                    --use-conda \
-                    --show-failed-logs \
-                    --cores 2 \
-                    --conda-cleanup-pkgs cache
-        shell: micromamba-shell {0}
-
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
@@ -67,6 +55,13 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
       - run: pip install -U laminci
+      - run: pip install snakemake ftputil
+      - name: Download and install Conda
+        run: |
+          wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+          bash miniconda.sh -b -p $HOME/miniconda
+          yes | conda install -n base -c conda-forge mamba
+      - run: sudo apt-get -y install graphviz
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}

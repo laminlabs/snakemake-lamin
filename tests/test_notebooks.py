@@ -1,6 +1,6 @@
+import shutil
 from pathlib import Path
 
-import lamin_logger as logger
 import nbproject_test as test
 
 
@@ -9,8 +9,9 @@ def test_notebooks():
     docs_folder = Path(__file__).parents[1] / "docs/"
 
     for check_folder in docs_folder.glob("./**"):
-        # these are the notebook testpaths
-        if not str(check_folder).endswith(("guide", "faq")):
+        if "rna-seq-star-deseq2" in str(check_folder):
             continue
-        logger.debug(f"\n{check_folder}")
         test.execute_notebooks(check_folder, write=True)
+
+    # Clean up unnecessary files
+    shutil.rmtree(f"{docs_folder}/rna-seq-star-deseq2", ignore_errors=True)
