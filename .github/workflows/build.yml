@@ -45,11 +45,6 @@ jobs:
           cache-environment: true
           post-cleanup: none
 
-      - name: Clone rna-seq-star-deseq2
-        run: |
-          git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v2.0.0
-          mv rna-seq-star-deseq2 docs
-
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
