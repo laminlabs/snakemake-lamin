@@ -1,16 +1,3 @@
-"""Integrate LaminDB & Snakemake.
-
-Import the package::
-
-   import snakemake_lamin_usecases
-
-This is the complete API reference:
-
-.. autosummary::
-   :toctree: .
-
-   example_function
-   ExampleClass
-"""
+"""Integrate LaminDB & Snakemake."""
 
 __version__ = "0.0.1"  # denote a pre-release for 0.1.0 with 0.1rc1
