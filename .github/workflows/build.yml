@@ -52,7 +52,8 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
 
-      - run: pip install -U laminci ftputil
+      - run: pip install -U laminci
+      - run: pip install ftputil
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -86,4 +87,3 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-  
