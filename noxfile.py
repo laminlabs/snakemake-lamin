@@ -21,6 +21,7 @@ def lint(session: nox.Session) -> None:
 def build(session):
     branch = "main" if IS_PR else "release"
     install_lamindb(session, branch=branch)
+    run(session, "uv pip install --system pytest")
     run(session, "pytest -s ./tests/test_notebooks.py")
     build_docs(session, strict=False)
     upload_docs_artifact(aws=True)
