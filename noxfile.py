@@ -18,7 +18,7 @@ def lint(session: nox.Session) -> None:
 
 
 @nox.session()
-def build(session, group):
+def build(session):
     branch = "main" if IS_PR else "release"
     install_lamindb(session, branch=branch)
     run(session, "pytest -s ./tests/test_notebooks.py")
