@@ -54,7 +54,8 @@ jobs:
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
-      - run: pip install -U laminci snakemake ftputil
+      - run: pip install "laminci[run-notebooks]@git+https://@github.com/laminlabs/laminci"
+      - run: pip install -U snakemake ftputil
       - name: Download and install Conda
         run: |
           wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
