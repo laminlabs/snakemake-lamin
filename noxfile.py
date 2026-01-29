@@ -24,4 +24,4 @@ def build(session):
     run(session, "uv pip install --system pytest")
     run(session, "pytest -s ./tests/test_notebooks.py")
     build_docs(session, strict=False)
-    upload_docs_artifact(aws=True)
+    upload_docs_artifact()
