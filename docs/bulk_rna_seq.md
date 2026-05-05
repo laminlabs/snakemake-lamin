@@ -21,6 +21,8 @@ First we clone the Snakemake pipeline with git. Because the test datasets come w
 
 ```python
 import lamindb as ln
+import subprocess
+from pathlib import Path
 ```
 
 ## Registering inputs
@@ -56,15 +58,26 @@ input_paths = [input_fastq.cache() for input_fastq in input_fastqs]
 Let's run the pipeline.
 
 ```python
-!snakemake \
-    --directory rna-seq-star-deseq2/.test \
-    --snakefile rna-seq-star-deseq2/workflow/Snakefile \
-    --configfile rna-seq-star-deseq2/.test/config_basic/config.yaml \
-    --use-conda \
-    --show-failed-logs \
-    --cores 2 \
-    --conda-frontend conda \
-    --conda-cleanup-pkgs cache
+subprocess.run(
+    [
+        "snakemake",
+        "--directory",
+        "rna-seq-star-deseq2/.test",
+        "--snakefile",
+        "rna-seq-star-deseq2/workflow/Snakefile",
+        "--configfile",
+        "rna-seq-star-deseq2/.test/config_basic/config.yaml",
+        "--use-conda",
+        "--show-failed-logs",
+        "--cores",
+        "2",
+        "--conda-frontend",
+        "conda",
+        "--conda-cleanup-pkgs",
+        "cache",
+    ],
+    check=True,
+)
 ```
 
 ## Registering outputs
@@ -99,8 +112,14 @@ Count matrix.
 <!-- #endregion -->
 
 ```python
-count_matrix = ln.Artifact(f"{root_dir}/.test/results/counts/all.symbol.tsv")
-count_matrix.save()
+count_matrix_path = Path(root_dir) / ".test/results/counts/all.symbol.tsv"
+if not count_matrix_path.exists():
+    raise FileNotFoundError(
+        f"Expected output not found: {count_matrix_path}. "
+        "Inspect Snakemake logs under rna-seq-star-deseq2/.test/logs/"
+    )
+
+count_matrix = ln.Artifact(count_matrix_path).save()
 ```
 
 ## Visualize
