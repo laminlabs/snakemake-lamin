@@ -57,6 +57,9 @@ input_paths = [input_fastq.cache() for input_fastq in input_fastqs]
 
 Let's run the pipeline.
 
+To make this robust in CI, we target outputs that don't depend on live Ensembl
+biomaRt lookups (which can be intermittently unavailable).
+
 ```python
 subprocess.run(
     [
@@ -75,6 +78,8 @@ subprocess.run(
         "conda",
         "--conda-cleanup-pkgs",
         "cache",
+        "results/counts/all.tsv",
+        "results/qc/multiqc_report.html",
     ],
     check=True,
 )
@@ -112,7 +117,7 @@ Count matrix.
 <!-- #endregion -->
 
 ```python
-count_matrix_path = Path(root_dir) / ".test/results/counts/all.symbol.tsv"
+count_matrix_path = Path(root_dir) / ".test/results/counts/all.tsv"
 if not count_matrix_path.exists():
     raise FileNotFoundError(
         f"Expected output not found: {count_matrix_path}. "
