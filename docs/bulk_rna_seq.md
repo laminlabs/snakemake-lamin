@@ -13,10 +13,10 @@ Typically, you would include lamindb directly within your Snakemake workflow.
 
 First we clone the Snakemake pipeline with git. Because the test datasets come with the repo and, for simplicity, we want to avoid moving them into another directory, we initialize a LaminDB instance in the same directory.
 
-```python
+```bash
 # pip install lamindb snakemake
-!git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v3.1.0
-!lamin init --storage ./rna-seq-star-deseq2
+git clone https://github.com/snakemake-workflows/rna-seq-star-deseq2 --single-branch --branch v3.1.0
+lamin init --storage ./rna-seq-star-deseq2
 ```
 
 ```python
