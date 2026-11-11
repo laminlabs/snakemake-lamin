@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_EVENT_NAME: ${{ github.event_name }}
+      # Latest Miniconda prompts for Anaconda channel Terms of Service.
+      # GitHub Actions sets CI=true, and this covers shells that do not.
+      CONDA_PLUGINS_AUTO_ACCEPT_TOS: "yes"
     strategy:
       fail-fast: false
       matrix:
@@ -59,8 +62,12 @@ jobs:
       - name: Download and install Conda
         run: |
           wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-          bash miniconda.sh -b -p $HOME/miniconda
-          yes | conda install -n base -c conda-forge mamba
+          bash miniconda.sh -b -p "$HOME/miniconda"
+          # ubuntu-latest (26.04) no longer ships Miniconda on PATH.
+          # condabin provides `conda` without shadowing setup-python's interpreter.
+          echo "$HOME/miniconda/condabin" >> "$GITHUB_PATH"
+          export PATH="$HOME/miniconda/condabin:$PATH"
+          conda install -y -n base -c conda-forge mamba
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
